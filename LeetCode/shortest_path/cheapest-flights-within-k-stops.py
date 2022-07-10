@@ -20,6 +20,7 @@ class Solution:
         # 우선 순위 큐 최소값 기준으로 도착점까지 최소 비용 판별
         while Q:
             price, node, k = heapq.heappop(Q)
+            
             if node == dst:
                 return price
             if k >= 0:
@@ -37,4 +38,44 @@ class Solution:
 - 아직 경유지를 더 거칠 수 있는지 확인하는 조건이 추가됨
 - 방문했던 노드를 저장하는 변수 없음
 
+근데 이 코드 제출하면 시간초과 떠서 다른 풀이를 찾았다.
+'''
+
+
+#다른 풀이 - time limit exceed 안나는 풀이
+from collections import defaultdict
+
+
+class Solution:
+    def findCheapestPrice(self, n: int, flights: List[List[int]], src: int, dst: int, K: int) -> int:
+        
+        graph=defaultdict(list)
+        
+        for s, d, p in flights:
+            graph[s].append((d,p))
+        
+        q=[(0, src, K)]
+        vis={}
+        
+        while q:
+            price, node, k = heapq.heappop(q)
+            
+            if node==dst:
+                return price
+            
+            if node not in vis or vis[node]<=k:
+                vis[node]=k
+                for d, p in graph[node]:
+                    if k>=0:
+                        tmp=price+p
+                        heapq.heappush(q, (tmp, d, k-1))
+        
+        return -1
+
+'''
+방문한 노드를 확인하는 부분이 추가되었다. 다른 경로일 때 해당 노드를 재방문할 수 있어서
+해당 노드를 방문하려면 더 적은 경유지를 거쳤어야 한다. 경유지의 수를 빼고 있기 때문에 >k가 아니라 <=k로 했다.
+k가 0이상인 것을 확인해야 아직 최대 경유지 수를 초과하지 않았다는 것을 알 수 있다.
+
+풀이참고 : https://8iggy.tistory.com/115
 '''
