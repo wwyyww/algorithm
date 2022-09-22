@@ -1,6 +1,31 @@
 #17298. 오큰수
 #문제 링크 : https://www.acmicpc.net/problem/17298
 
+#내 풀이 - 책 가이드라인 보고
+import sys
+n=int(sys.stdin.readline())
+nums = list(map(int, input().split()))
+output=[-1 for i in range(n)]
+
+stack=[]
+
+for i in range(n):
+    
+    while stack and nums[i]>nums[stack[-1]]:
+        output[stack.pop()]=nums[i]
+    stack.append(i)
+
+print(*output)
+
+'''
+그냥 풀려고 하니까 스택을 어떻게 써야할지 감이 안와서 책 가이드라인을 보니까
+스택에 인덱스를 추가해서 풀으라고 되어 있었다.
+출력 결과물에는 미리 -1을 세팅해두었다.
+현재 인덱스의 값이 stack 가장 위에 있는 인덱스의 값 보다 크면 그 수를 오큰수로 저장한다.
+'''
+
+
+
 #내 풀이 - 시간초과
 import sys
 n=int(sys.stdin.readline())
