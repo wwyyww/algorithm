@@ -1,5 +1,5 @@
-#1377. 버블 소트
-#문제 링크 : https://www.acmicpc.net/problem/1377
+#1427. 소트인사이드
+#문제 링크 : https://www.acmicpc.net/problem/1427
 
 #내 풀이 - 책 가이드라인 보고
 
